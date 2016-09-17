@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-leader
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: jenkins-leader
+    spec:
+      securityContext:
+        fsGroup: 99
+      containers:
+        - name: jenkins-leader
+          image: smesch/jenkins-kubernetes-leader-custom:2.7.4
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-leader-pvc

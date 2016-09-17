@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.snsnotify.AmazonSNSNotifier_-DescriptorImpl plugin="snsnotify@1.13">
+  <awsAccessKey></awsAccessKey>
+  <awsSecretKey></awsSecretKey>
+  <defaultTopicArn>arn:aws:sns:us-east-1:044021229901:jenkins</defaultTopicArn>
+  <defaultMessageTemplate></defaultMessageTemplate>
+  <defaultSendNotificationOnStart>true</defaultSendNotificationOnStart>
+  <defaultLocalCredential>true</defaultLocalCredential>
+  <defaultNotifyOnConsecutiveSuccesses>true</defaultNotifyOnConsecutiveSuccesses>
+</org.jenkinsci.plugins.snsnotify.AmazonSNSNotifier_-DescriptorImpl>
