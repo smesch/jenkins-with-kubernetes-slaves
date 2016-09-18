@@ -6,7 +6,7 @@ metadata:
     run: jenkins-leader
 spec:
   capacity:
-    storage: 20Gi
+    storage: 32Gi
   accessModes:
     - ReadWriteOnce
   awsElasticBlockStore:
