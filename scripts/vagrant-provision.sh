@@ -1,5 +1,5 @@
     # Install git, unzip & jq
-    sudo apt-get install git unzip jq -y
+    sudo apt-get install unzip jq -y
 
     # Download go version 1.7.1, extract the contents and place them in /usr/local
     wget --quiet https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz

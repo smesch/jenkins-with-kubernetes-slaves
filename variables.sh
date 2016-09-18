@@ -16,5 +16,4 @@ sed -i \
     -e "s,\${AWS_AVAIL_ZONE\},$AWS_AVAIL_ZONE,g" \
     -e "s,\${DOMAIN_NAME\},$DOMAIN_NAME,g" \
     -e "s,\${CLUSTER_MASTER_SIZE\},$CLUSTER_MASTER_SIZE,g" \
-    -e "s,\${CLUSTER_NODE_SIZE\},$CLUSTER_NODE_SIZE,g" \    
-    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/*.sh
+    -e "s,\${CLUSTER_NODE_SIZE\},$CLUSTER_NODE_SIZE,g" /home/vagrant/jenkins-with-kubernetes-slaves/scripts/*.sh

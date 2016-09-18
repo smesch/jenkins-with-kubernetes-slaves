@@ -1,2 +1,3 @@
 .vagrant/*
 variables_private.sh
+variables_public.sh

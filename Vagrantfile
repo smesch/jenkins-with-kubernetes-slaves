@@ -15,6 +15,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    # Install git
+    sudo apt-get install git -y
     # Clone repo go into /home/vagrant/ directory
     git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git /home/vagrant/jenkins-with-kubernetes-slaves/
   SHELL
