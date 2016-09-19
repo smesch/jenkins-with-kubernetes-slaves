@@ -7,4 +7,4 @@ export JENKINS_KUBERNETES_VOLUME
 aws ec2 delete-volume --volume-id $JENKINS_KUBERNETES_VOLUME
 
 # Delete the S3 bucket
-aws s3api delete-bucket --bucket ${DOMAIN_NAME} --region ${AWS_REGION}
+aws s3api delete-bucket --bucket ${DOMAIN_NAME} --region ${AWS_DEFAULT_REGION}

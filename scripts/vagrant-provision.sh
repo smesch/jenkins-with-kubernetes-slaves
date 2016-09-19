@@ -13,8 +13,6 @@
     echo "export PATH=$PATH:/usr/local/go/bin" >>~/.profile
     echo "export GOPATH=/home/vagrant" >>~/.profile
     echo "export PATH=$PATH:${GOPATH}/bin" >>~/.profile
-    echo $SHELL
-    echo $PATH
     . ~/.profile
 
     # Download and compile KOPS
