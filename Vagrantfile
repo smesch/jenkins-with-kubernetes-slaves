@@ -12,8 +12,10 @@ Vagrant.configure(2) do |config|
     vb.cpus = 2
   end
 
+# Copy SSH public key for AWS to guest
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
 
+# Install git and clone repo to /home/vagrant/jenkins-with-kubernetes-slaves/
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     # Install git
     sudo apt-get install git -y
@@ -21,12 +23,18 @@ Vagrant.configure(2) do |config|
     git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git /home/vagrant/jenkins-with-kubernetes-slaves/
   SHELL
 
-  config.vm.provision "shell", path: "variables.sh", privileged: false, binary: false
+# Copy and run variables.sh script on guest
+#  config.vm.provision "shell", path: "variables.sh", privileged: false, binary: false
 
+# Run the local copies of the vagrant-provision.sh & create-cluster.sh
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     # Run vagrant provisioning script and create cluster script
-    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/vagrant-provision.sh
-    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/create-cluster.sh
+    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/vagrant-provision-only-aws.sh
+#    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/create-cluster.sh
   SHELL
+
+# Copy AWS CLI configuration files to guest
+  config.vm.provision "file", source: "~/.aws/config", destination: "/home/vagrant/.ssh/id_rsa.pub"
+  config.vm.provision "file", source: "~/.aws/credentials", destination: "/home/vagrant/.ssh/id_rsa.pub"
 
 end

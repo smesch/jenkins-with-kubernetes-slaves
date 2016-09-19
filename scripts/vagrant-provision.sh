@@ -28,11 +28,6 @@
     sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
     rm awscli-bundle.zip
 
-    # Configure the AWS CLI
-    aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
-    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-    aws configure set default.region ${AWS_REGION}
-
     # Install Docker
     sudo curl -sSL https://get.docker.com/ | sh
     sudo usermod -aG docker vagrant

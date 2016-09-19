@@ -1,3 +1,4 @@
 .vagrant/*
 variables_private.sh
-variables_public.sh
+variables.sh
+questions.md
