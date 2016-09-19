@@ -46,11 +46,11 @@ Vagrant.configure(2) do |config|
   SHELL
 
 # Copy and run variables.sh script on guest
-  config.vm.provision "shell", path: "./scripts/variables.sh", privileged: false, binary: false
+  config.vm.provision "shell", path: "./scripts/set-variables.sh", privileged: false, binary: false
 
 # Run the local copies of the vagrant-provision.sh
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/vagrant-provision.sh
+    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/provision-vagrant.sh
   SHELL
 
 end
