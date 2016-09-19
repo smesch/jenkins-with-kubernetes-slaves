@@ -1,7 +1,6 @@
-# jenkins-with-kubernetes-slaves
-On-demand Jenkins slaves within a Kubernetes cluster on AWS
+# Continuous Deployment with On-demand Jenkins Slaves in a Kubernetes Cluster on AWS
 
-# Pre-install Steps
+## Prerequisites
 * Install go
 * Created project/golang folder and set it as GOPATH
 * Add Kubectl to bin path (sudo cp kubernetes/platforms/darwin/amd64/kubectl /usr/local/bin/kubectl)

@@ -4,6 +4,7 @@ aws s3api create-bucket --bucket ${DOMAIN_NAME} --region ${AWS_DEFAULT_REGION}
 # Set KOPS_STATE_STORE variable
 export KOPS_STATE_STORE=s3://${DOMAIN_NAME}
 echo "export KOPS_STATE_STORE=s3://${DOMAIN_NAME}" >>~/.profile
+. ~/.profile
 
 # Create the cluster
 /home/vagrant/bin/kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --cloud=aws --zones=${AWS_AVAIL_ZONE} ${DOMAIN_NAME}

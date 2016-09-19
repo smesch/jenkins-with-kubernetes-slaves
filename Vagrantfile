@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
   SHELL
 
 # Copy and run variables.sh script on guest
-  config.vm.provision "shell", path: "variables.sh", privileged: false, binary: false
+  config.vm.provision "shell", path: "./scripts/variables.sh", privileged: false, binary: false
 
 # Run the local copies of the vagrant-provision.sh
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
