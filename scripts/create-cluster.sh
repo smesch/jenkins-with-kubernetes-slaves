@@ -1,5 +1,5 @@
 # Create S3 bucket
-aws s3api create-bucket --bucket ${DOMAIN_NAME} --region ${AWS_DEFAULT_REGION}
+aws s3api create-bucket --region ${AWS_REGION} --bucket ${DOMAIN_NAME}
 
 # Set KOPS_STATE_STORE variable
 export KOPS_STATE_STORE=s3://${DOMAIN_NAME}

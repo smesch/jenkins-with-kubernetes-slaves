@@ -8,7 +8,8 @@
 
 aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
 aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-aws_default_region = "us-east-1"
+aws_default_region = ENV['AWS_DEFAULT_REGION']
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -18,7 +19,7 @@ Vagrant.configure(2) do |config|
   end
 
 # Copy SSH public key for AWS to guest
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
+  config.vm.provision "file", source: "#{ssh_public_key_path}", destination: "/home/vagrant/.ssh/id_rsa.pub"
 
 # Copy AWS CLI configuration files to guest
 #  config.vm.provision "file", source: "~/.aws/config", destination: "~/.aws/config"
@@ -35,10 +36,12 @@ Vagrant.configure(2) do |config|
     # Write ENV variables to .profile
     export AWS_ACCESS_KEY_ID=#{aws_access_key_id}
     export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}
+    export AWS_DEFAULT_REGION=#{aws_default_region}
 
     # Remove AWS Key variables if they are empty
     if [ -z ${AWS_ACCESS_KEY_ID} ]; then unset AWS_ACCESS_KEY_ID; else echo "export AWS_ACCESS_KEY_ID=#{aws_access_key_id}" >>~/.profile; fi
     if [ -z ${AWS_SECRET_ACCESS_KEY} ]; then unset AWS_SECRET_ACCESS_KEY; else echo "export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}" >>~/.profile; fi
+    if [ -z ${AWS_SECRET_DEFAULT_REGION} ]; then unset AWS_DEFAULT_REGION; else echo "export AWS_DEFAULT_REGION=#{aws_default_region}" >>~/.profile; fi
 
   SHELL
 
