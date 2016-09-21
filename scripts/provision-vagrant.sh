@@ -1,12 +1,12 @@
-    # Install git, unzip & jq
+    # Install unzip & jq
     sudo apt-get install unzip jq -y
 
-    # Download go version 1.7.1, extract the contents and place them in /usr/local
+    # Install Go (v.1.7.1) 
     wget --quiet https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
     sudo tar -C /usr/local -xzf go1.7.1.linux-amd64.tar.gz
     rm go1.7.1.linux-amd64.tar.gz
 
-    # Set required paths for go
+    # Set the required paths for Go
     export PATH=$PATH:/usr/local/go/bin
     export GOPATH=/home/vagrant
     export PATH=$PATH:${GOPATH}/bin
@@ -15,22 +15,22 @@
     echo "export PATH=$PATH:${GOPATH}/bin" >>~/.profile
     . ~/.profile
 
-    # Download and compile KOPS
+    # Install KOPS (latest)
     go get -d k8s.io/kops
     cd ${GOPATH}/src/k8s.io/kops/
     make
 
-    # Download and install AWS CLI
+    # Install AWS CLI (latest)
     wget --quiet https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
     unzip awscli-bundle.zip
     sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
     rm awscli-bundle.zip
 
-    # Install Docker
+    # Install Docker (latest)
     sudo curl -sSL https://get.docker.com/ | sh
     sudo usermod -aG docker vagrant
 
-    # Install Kubernetes kubectl
+    # Install Kubernetes kubectl (v.1.3.7)
     wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.3.7/bin/linux/amd64/kubectl
     sudo chmod +x kubectl
     sudo mv kubectl /usr/local/bin/kubectl
