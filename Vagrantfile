@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get install git -y
 
     # Clone repo go into /home/vagrant/ directory
-    git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git /home/vagrant/jenkins-with-kubernetes-slaves/
+    git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git $HOME/jenkins-with-kubernetes-slaves/
 
     # Write ENV variables to .profile
     export AWS_ACCESS_KEY_ID=#{aws_access_key_id}
@@ -39,18 +39,14 @@ Vagrant.configure(2) do |config|
     export AWS_DEFAULT_REGION=#{aws_default_region}
 
     # Remove AWS Key variables if they are empty
-    if [ -z ${AWS_ACCESS_KEY_ID} ]; then unset AWS_ACCESS_KEY_ID; else echo "export AWS_ACCESS_KEY_ID=#{aws_access_key_id}" >>~/.profile; fi
-    if [ -z ${AWS_SECRET_ACCESS_KEY} ]; then unset AWS_SECRET_ACCESS_KEY; else echo "export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}" >>~/.profile; fi
-    if [ -z ${AWS_SECRET_DEFAULT_REGION} ]; then unset AWS_DEFAULT_REGION; else echo "export AWS_DEFAULT_REGION=#{aws_default_region}" >>~/.profile; fi
-
+    if [ -z $AWS_ACCESS_KEY_ID ]; then unset AWS_ACCESS_KEY_ID; else echo "export AWS_ACCESS_KEY_ID=#{aws_access_key_id}" >>~/.profile; fi
+    if [ -z $AWS_SECRET_ACCESS_KEY ]; then unset AWS_SECRET_ACCESS_KEY; else echo "export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}" >>~/.profile; fi
+    if [ -z $AWS_DEFAULT_REGION ]; then unset AWS_DEFAULT_REGION; else echo "export AWS_DEFAULT_REGION=#{aws_default_region}" >>~/.profile; fi
   SHELL
 
-# Copy and run variables.sh script on guest
-  config.vm.provision "shell", path: "variables.sh", privileged: false, binary: false
-
 # Run the local copies of the vagrant-provision.sh
-#  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-#    /home/vagrant/jenkins-with-kubernetes-slaves/scripts/provision-vagrant.sh
-#  SHELL
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    $HOME/jenkins-with-kubernetes-slaves/scripts/provision-vagrant.sh
+  SHELL
 
 end
