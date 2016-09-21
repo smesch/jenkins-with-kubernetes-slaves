@@ -1,8 +1,7 @@
 # Set variables from variables.sh script
-./variables.sh
+source ./scripts/variables.sh
 
 # Delete the cluster
-. ~/.profile
 ${GOPATH}/bin/kops delete cluster ${DOMAIN_NAME} --yes
 
 # Delete the persistent volume for Jenkins
