@@ -45,11 +45,6 @@ Vagrant.configure(2) do |config|
     if [ -z $AWS_ACCESS_KEY_ID ]; then unset AWS_ACCESS_KEY_ID; else echo "export AWS_ACCESS_KEY_ID=#{aws_access_key_id}" >>~/.profile; fi
     if [ -z $AWS_SECRET_ACCESS_KEY ]; then unset AWS_SECRET_ACCESS_KEY; else echo "export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}" >>~/.profile; fi
     if [ -z $AWS_DEFAULT_REGION ]; then unset AWS_DEFAULT_REGION; else echo "export AWS_DEFAULT_REGION=#{aws_default_region}" >>~/.profile; fi
-  
-    # Export AWS EC2 key pair path ENV variable and write it to ~/.profile on guest
-    export AWS_KEYPAIR_PUB_KEY_PATH=#{aws_keypair_pub_key_path}
-    echo "export AWS_KEYPAIR_PUB_KEY_PATH=#{aws_keypair_pub_key_path}" >>~/.profile
-  
   SHELL
 
 # Run the local copy of the provision-vagrant.sh script

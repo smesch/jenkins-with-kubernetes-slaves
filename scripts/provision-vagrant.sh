@@ -15,7 +15,7 @@ echo "export GOPATH=/home/vagrant" >>~/.profile
 echo "export PATH=$PATH:${GOPATH}/bin" >>~/.profile
 . ~/.profile
 
-# Install KOPS (latest)
+# Install Kops (latest)
 go get -d k8s.io/kops
 cd ${GOPATH}/src/k8s.io/kops/
 make
@@ -30,7 +30,7 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubernetes kubectl (v.1.3.7)
+# Install Kubectl (v.1.3.7)
 wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.3.7/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
