@@ -11,8 +11,8 @@ aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
 aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
 aws_default_region = ENV['AWS_DEFAULT_REGION']
 
-# Path to SSH public key for AWS
-ssh_public_key_path = "~/.ssh/id_rsa.pub"
+# Path to SSH public key for the AWS EC2 key pair from host
+aws_keypair_pub_key_path = "~/.ssh/id_rsa.pub"
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -22,9 +22,9 @@ Vagrant.configure(2) do |config|
   end
 
 # Copy SSH public key for AWS to guest
-  config.vm.provision "file", source: "#{ssh_public_key_path}", destination: "/home/vagrant/.ssh/id_rsa.pub"
+  config.vm.provision "file", source: "#{aws_keypair_pub_key_path}", destination: "/home/vagrant/.ssh/id_rsa.pub"
 
-# Copy AWS CLI configuration files to guest
+# Copy AWS CLI configuration files to guest (uncomment if you used "aws configure" to configure you AWS CLI instead of ENV variables)
 #  config.vm.provision "file", source: "~/.aws/config", destination: "~/.aws/config"
 #  config.vm.provision "file", source: "~/.aws/credentials", destination: "~/.aws/credentials"
 
@@ -45,6 +45,11 @@ Vagrant.configure(2) do |config|
     if [ -z $AWS_ACCESS_KEY_ID ]; then unset AWS_ACCESS_KEY_ID; else echo "export AWS_ACCESS_KEY_ID=#{aws_access_key_id}" >>~/.profile; fi
     if [ -z $AWS_SECRET_ACCESS_KEY ]; then unset AWS_SECRET_ACCESS_KEY; else echo "export AWS_SECRET_ACCESS_KEY=#{aws_secret_access_key}" >>~/.profile; fi
     if [ -z $AWS_DEFAULT_REGION ]; then unset AWS_DEFAULT_REGION; else echo "export AWS_DEFAULT_REGION=#{aws_default_region}" >>~/.profile; fi
+  
+    # Export AWS EC2 key pair path ENV variable and write it to ~/.profile on guest
+    export AWS_KEYPAIR_PUB_KEY_PATH=#{aws_keypair_pub_key_path}
+    echo "export AWS_KEYPAIR_PUB_KEY_PATH=#{aws_keypair_pub_key_path}" >>~/.profile
+  
   SHELL
 
 # Run the local copy of the provision-vagrant.sh script
