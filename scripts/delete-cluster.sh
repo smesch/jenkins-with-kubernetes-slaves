@@ -4,6 +4,9 @@ source ./scripts/variables.sh
 # Delete the Kubernetes cluster
 ${GOPATH}/bin/kops delete cluster ${DOMAIN_NAME} --yes
 
+# Wait for Kubernetes cluster instances to be fully terminated
+sleep 60
+
 # Delete the persistent volume used for Jenkins
 export JENKINS_KUBERNETES_VOLUME=$(aws ec2 describe-volumes --region ${AWS_REGION} --filters Name=tag-key,Values="Name" Name=tag-value,Values="jenkins-kubernetes-volume" --output text --query 'Volumes[*].VolumeId')
 aws ec2 delete-volume --region ${AWS_REGION} --volume-id $JENKINS_KUBERNETES_VOLUME
