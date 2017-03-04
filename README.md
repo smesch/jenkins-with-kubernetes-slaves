@@ -173,7 +173,7 @@ export AWS_AVAIL_ZONE="us-east-1b"
 export DOMAIN_NAME="jenkins.kubernetes.yourdomain.com"
 export CLUSTER_MASTER_SIZE="t2.micro"
 export CLUSTER_NODE_SIZE="t2.micro"
-export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.7.4"
+export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.32.3"
 export AWS_KEYPAIR_PUB_KEY_PATH="~/.ssh/id_rsa.pub"
 
 # Set KOPS_STATE_STORE to S3 bucket name (leave as-is)

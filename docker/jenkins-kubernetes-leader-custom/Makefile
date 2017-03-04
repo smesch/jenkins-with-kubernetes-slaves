@@ -3,7 +3,7 @@
 DOCKER  = docker
 REPO    = smesch
 NAME    = jenkins-kubernetes-leader-custom
-VERSION = 2.7.4
+VERSION = 2.32.3
 
 all: build
 

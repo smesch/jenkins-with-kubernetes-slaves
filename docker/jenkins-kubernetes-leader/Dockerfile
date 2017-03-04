@@ -1,7 +1,7 @@
-FROM jenkins:2.7.4
+FROM jenkins:2.32.3
 MAINTAINER Steven Eschinger <steven@eschinger.com>
 
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.7.4}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.32.3}
 
 USER root
 RUN apt-get update

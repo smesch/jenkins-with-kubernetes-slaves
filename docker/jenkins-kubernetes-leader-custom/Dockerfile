@@ -1,4 +1,4 @@
-FROM smesch/jenkins-kubernetes-leader:2.7.4
+FROM smesch/jenkins-kubernetes-leader:2.32.3
 MAINTAINER Steven Eschinger <steven@eschinger.com>
 
 COPY jobs /usr/share/jenkins/ref/jobs
