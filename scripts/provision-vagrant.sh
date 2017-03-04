@@ -30,7 +30,12 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 
-#Install Kops (1.5.1)
+# Install Kops (1.5.1)
 wget --quiet https://github.com/kubernetes/kops/releases/download/1.5.1/kops-linux-amd64
 sudo chmod +x kops-linux-amd64
 sudo mv kops-linux-amd64 /usr/local/bin/kops
+
+# Set variable to fix obsolete version issue (refer to GitHub/kubernetes/kops issue #1790)
+export KOPS_RUN_OBSOLETE_VERSION=true
+echo "export KOPS_RUN_OBSOLETE_VERSION=true" >>~/.profile
+. ~/.profile
