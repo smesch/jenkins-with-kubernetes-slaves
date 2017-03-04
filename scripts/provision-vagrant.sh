@@ -1,12 +1,12 @@
 # Install unzip & jq
 sudo apt-get install unzip jq -y
 
-# Install Go (v.1.7.1) 
-wget --quiet https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.7.1.linux-amd64.tar.gz
-rm go1.7.1.linux-amd64.tar.gz
+# Install Go (v.1.8) 
+wget --quiet https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.8.linux-amd64.tar.gz
+rm go1.8.linux-amd64.tar.gz
 
-    # Set the required paths for Go
+# Set the required paths for Go
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=/home/vagrant
 export PATH=$PATH:${GOPATH}/bin
@@ -30,7 +30,7 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubectl (v.1.3.7)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.3.7/bin/linux/amd64/kubectl
+# Install Kubectl (v.1.4.9)
+wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.4.9/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
