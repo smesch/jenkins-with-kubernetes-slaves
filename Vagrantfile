@@ -52,9 +52,4 @@ Vagrant.configure(2) do |config|
     $HOME/jenkins-with-kubernetes-slaves/scripts/provision-vagrant.sh
   SHELL
 
-# Run the local copy of the ntpsync-vagrant.sh script
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    $HOME/jenkins-with-kubernetes-slaves/scripts/ntpsync-vagrant.sh
-  SHELL
-
 end
