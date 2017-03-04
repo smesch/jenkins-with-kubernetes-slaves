@@ -31,6 +31,6 @@ sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 
 # Install Kops (1.5.1)
-wget --quiet https://github.com/kubernetes/kops/releases/download/v1.5.1/kops-linux-amd64
+wget --quiet https://github.com/kubernetes/kops/releases/download/1.5.1/kops-linux-amd64
 sudo chmod +x kops-linux-amd64
 sudo mv kops-linux-amd64 /usr/local/bin/kops
