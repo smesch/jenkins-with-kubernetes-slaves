@@ -25,12 +25,12 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubectl (1.4.7)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.4.7/bin/linux/amd64/kubectl
+# Install Kubectl (1.4.9)
+wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.4.9/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 
-# Install Kops (1.4.4)
-wget --quiet https://github.com/kubernetes/kops/releases/download/1.4.4/kops-linux-amd64
+# Install Kops (1.5.1)
+wget --quiet https://github.com/kubernetes/kops/releases/download/v1.5.1/kops-linux-amd64
 sudo chmod +x kops-linux-amd64
 sudo mv kops-linux-amd64 /usr/local/bin/kops

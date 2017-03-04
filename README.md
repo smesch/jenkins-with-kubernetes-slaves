@@ -216,8 +216,8 @@ source ./scripts/variables.sh
 aws s3api create-bucket --region ${AWS_REGION} --bucket ${DOMAIN_NAME}
 
 # Create the Kubernetes cluster
-${GOPATH}/bin/kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --cloud=aws --zones=${AWS_AVAIL_ZONE} --ssh-public-key=${AWS_KEYPAIR_PUB_KEY_PATH} ${DOMAIN_NAME}
-${GOPATH}/bin/kops update cluster ${DOMAIN_NAME} --yes
+kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --cloud=aws --zones=${AWS_AVAIL_ZONE} --ssh-public-key=${AWS_KEYPAIR_PUB_KEY_PATH} ${DOMAIN_NAME}
+kops update cluster ${DOMAIN_NAME} --yes
 ```
 
 * The variables that you defined in the `/scripts/variables.sh` script are loaded
@@ -354,7 +354,7 @@ autoscaling-group	master-us-east-1b.masters.jenkins.kubernetes.c3group.io				mas
 source ./scripts/variables.sh
 
 # Delete the Kubernetes cluster
-${GOPATH}/bin/kops delete cluster ${DOMAIN_NAME} --yes
+kops delete cluster ${DOMAIN_NAME} --yes
 
 # Wait for Kubernetes cluster instances to be fully terminated
 sleep 60
