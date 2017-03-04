@@ -1,8 +1,8 @@
-# Continuous Integration with Dynamically Provisioned Jenkins Slaves in a Kubernetes Cluster on AWS
+# Dynamically Provisioned (On-Demand) Jenkins Slaves in a Kubernetes Cluster on AWS
 
 ![Jenkins on Kubernetes](images/screenshot_jenkins_console_1.png "Jenkins on Kubernetes")
 
-Integrating [Jenkins](https://jenkins.io/) with [Kubernetes](http://kubernetes.io/) using the [Kubernetes plugin](https://wiki.jenkins-ci.org/display/JENKINS/Kubernetes+Plugin) provides several key benefits. No longer are you required to maintain a static pool of Jenkins slaves and have those resources sitting idle when no jobs are being run. The Kubernetes plugin will orchestrate the creation and tear-down of Jenkins slaves on-demand when jobs are being run. This is of course easier to manage, optimizes your resource usage, and makes it possible to share resources with an existing Kubernetes cluster running other workloads.
+Integrating [Jenkins](https://jenkins.io/) with [Kubernetes](http://kubernetes.io/) using the [Kubernetes plugin](https://wiki.jenkins-ci.org/display/JENKINS/Kubernetes+Plugin) provides several key benefits. No longer are you required to maintain a static pool of Jenkins slaves and have those resources sitting idle when no jobs are being run. The Kubernetes plugin will orchestrate the creation and tear-down of Jenkins slaves on-demand when jobs are being run. This is of course easier to manage, optimizes your resource usage and makes it possible to share resources with an existing Kubernetes cluster running other workloads.
 
 The following guide will first take you through the steps to create a Kubernetes cluster in AWS using [Kops](https://github.com/kubernetes/kops/), which is a newer solution for easily deploying a production ready Kubernetes cluster on AWS.
 
@@ -20,7 +20,7 @@ This section will guide you through the preparation of  your local environment i
 
 2. The AWS CLI [installed](http://docs.aws.amazon.com/cli/latest/userguide/installing.html), [configured](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) with a default region, and the security credentials of an [IAM user](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) which has the `AdministratorAccess` [policy attached](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console).
 
-    **Note:** The `AdministratorAccess` policy is used for this demo for simplicity purposes. In a production environment, you may want to configure more granular permissions for the IAM user account.
+    **Note:** The `AdministratorAccess` policy is used for this demo for simplicity purposes. In a production environment, you will want to configure more granular permissions for the IAM user account. For more details, refer to the [Setup IAM user](https://github.com/kubernetes/kops/blob/master/docs/aws.md#setup-iam-user) section in the Kops repository.
 
     Install the AWS CLI:
 
@@ -46,7 +46,7 @@ This section will guide you through the preparation of  your local environment i
 
 3. An AWS EC2 key pair [created](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) and the corresponding [public key file](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#retrieving-the-public-key) on your local machine (default path is: `~/.ssh/id_rsa.pub`).
 
-4. A DNS hosted zone [created](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) in Route53 (e.g. yourdomain.com). This is a **requirement** for Kops to create the Kubernetes cluster. For more details, refer to the [Bringing up a cluster on AWS](https://github.com/kubernetes/kops/blob/master/docs/aws.md) document in the Kops repository.
+4. A DNS hosted zone [created](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) in Route53 (e.g. yourdomain.com). This is a **requirement** for Kops to create the Kubernetes cluster. For more details, refer to the [Configure DNS](https://github.com/kubernetes/kops/blob/master/docs/aws.md#configure-dns) section in the Kops repository.
 
 5. A working [Go environment](https://golang.org/doc/install) with your `GOPATH` set properly.
 
@@ -71,22 +71,20 @@ This section will guide you through the preparation of  your local environment i
 
 8. Jq [installed](https://stedolan.github.io/jq/download/)
 
-### Install Kubectl
+### Install Kubectl (1.4.9)
 
 ```
-wget https://storage.googleapis.com/kubernetes-release/release/v1.4.5/bin/linux/amd64/kubectl
+wget https://storage.googleapis.com/kubernetes-release/release/v1.4.9/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 ```
 
-### Install Kops
-
-Build the code (make sure you have set your GOPATH):
+### Install Kops (1.5.1)
 
 ```
-go get -d k8s.io/kops
-cd ${GOPATH}/src/k8s.io/kops/
-make
+wget https://github.com/kubernetes/kops/releases/download/1.5.1/kops-linux-amd64
+sudo chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
 ```
 
 ### Clone the repository
@@ -106,7 +104,7 @@ Now that your local environment is prepared, you can skip ahead to the [Update t
 
 2. AWS environment variables set for default region & security credentials of an [IAM user](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) which has the `AdministratorAccess` [policy attached](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console).
 
-    **Note:** The `AdministratorAccess` policy is used for this demo for simplicity purposes. In a production environment, you will want to configure more granular permissions for the IAM user account.
+    **Note:** The `AdministratorAccess` policy is used for this demo for simplicity purposes. In a production environment, you will want to configure more granular permissions for the IAM user account. For more details, refer to the [Setup IAM user](https://github.com/kubernetes/kops/blob/master/docs/aws.md#setup-iam-user) section in the Kops repository.
 
       ```
       export AWS_ACCESS_KEY_ID="Your-AWS-IAM-User-Access-Key-ID"
@@ -116,7 +114,7 @@ Now that your local environment is prepared, you can skip ahead to the [Update t
 
 3. An AWS EC2 key pair [created](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) and the corresponding [public key file](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#retrieving-the-public-key) on your local machine (default path is: `~/.ssh/id_rsa.pub`)
 
-4. A DNS hosted zone [created](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) in Route53 (e.g. yourdomain.com). This is a **requirement** for Kops to create the Kubernetes cluster. For more details, refer to the [Bringing up a cluster on AWS](https://github.com/kubernetes/kops#bringing-up-a-cluster-on-aws) section in the official Kops repository README.
+4. A DNS hosted zone [created](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) in Route53 (e.g. yourdomain.com). This is a **requirement** for Kops to create the Kubernetes cluster. For more details, refer to the [Configure DNS](https://github.com/kubernetes/kops/blob/master/docs/aws.md#configure-dns) section in the Kops repository.
 
 5. [Vagrant](https://www.vagrantup.com/docs/installation/) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads/) installed
 
