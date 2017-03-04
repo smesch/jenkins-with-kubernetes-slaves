@@ -12,7 +12,7 @@ Once the Kubernetes cluster is available, we will then deploy Jenkins with the K
 
 # Preparation of Local Environment
 
-This section will guide you through the preparation of  your local environment if you chose to provision the cluster from your machine. As an alternative, you can skip ahead to the [Using Vagrant](#using-vagrant) section which will let you create a virtual machine with everything you need already installed.
+This section will guide you through the preparation of your local environment if you chose to provision the cluster from your machine. As an alternative, you can skip ahead to the [Using Vagrant](#using-vagrant) section to create a virtual machine with everything you need already installed.
 
 ### Prerequisites
 
@@ -53,8 +53,9 @@ This section will guide you through the preparation of  your local environment i
     Install Go:
 
     ```
-    wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
-    sudo tar -C /usr/local -xzf go1.7.1.linux-amd64.tar.gz
+    wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go1.8.linux-amd64.tar.gz
+    rm go1.8.linux-amd64.tar.gz
     ```
 
     Set the required paths for Go:
@@ -106,11 +107,11 @@ Now that your local environment is prepared, you can skip ahead to the [Update t
 
     **Note:** The `AdministratorAccess` policy is used for this demo for simplicity purposes. In a production environment, you will want to configure more granular permissions for the IAM user account. For more details, refer to the [Setup IAM user](https://github.com/kubernetes/kops/blob/master/docs/aws.md#setup-iam-user) section in the Kops repository.
 
-      ```
-      export AWS_ACCESS_KEY_ID="Your-AWS-IAM-User-Access-Key-ID"
-      export AWS_SECRET_ACCESS_KEY="Your-AWS-IAM-User-Secret-Access-Key"
-      export AWS_DEFAULT_REGION="Your-AWS-Default-Region"
-      ```
+    ```
+    export AWS_ACCESS_KEY_ID="Your-AWS-IAM-User-Access-Key-ID"
+    export AWS_SECRET_ACCESS_KEY="Your-AWS-IAM-User-Secret-Access-Key"
+    export AWS_DEFAULT_REGION="Your-AWS-Default-Region"
+    ```
 
 3. An AWS EC2 key pair [created](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) and the corresponding [public key file](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#retrieving-the-public-key) on your local machine (default path is: `~/.ssh/id_rsa.pub`)
 
@@ -143,7 +144,7 @@ Run the following from the root of the repository where the Vagrantfile is locat
 vagrant up
 ```
 
-The provisioning of the Vagrant environment will take approximately 10 minutes, during which the following is happening:
+The provisioning of the Vagrant environment will take approximately 5 minutes, during which the following is happening:
 
 1. The AWS environment variables `$AWS_ACCESS_KEY_ID`, `$AWS_SECRET_ACCESS_KEY`, `$AWS_DEFAULT_REGION` defined on the host are set on the guest
 
@@ -151,7 +152,7 @@ The provisioning of the Vagrant environment will take approximately 10 minutes, 
 
 3. Git is installed and the repository is cloned on the guest
 
-4. The `/scripts/provision-vagrant.sh` script is run, which installs unzip, jq, go, Kops, the AWS CLI, Docker, and kubectl
+4. The `/scripts/provision-vagrant.sh` script is run, which installs unzip, jq, go, the AWS CLI, Docker, kubectl and kops
 
 Once the Vagrant virtual machine is started, run the following command to connect to it and then move into the root of the repository:
 
@@ -163,6 +164,8 @@ cd jenkins-with-kubernetes-slaves
 # Update the Variables.sh Script
 
 Once you have setup your local environment or provisioned and logged into your Vagrant environment, you will need to update the [`/scripts/variables.sh`](https://github.com/smesch/jenkins-with-kubernetes-slaves/blob/master/scripts/variables.sh) script with your specific details:
+
+{{< gist ryane 017da418ff44d1071e34f51d0b94ca98 "main.tf" >}}
 
 ```
 # Set values for variables
