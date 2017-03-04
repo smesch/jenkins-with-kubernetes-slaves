@@ -16,34 +16,62 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@0.7">
+    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@0.11">
       <name>kubernetes</name>
+      <defaultsProviderTemplate></defaultsProviderTemplate>
       <templates>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+          <inheritFrom></inheritFrom>
           <name>jenkins-kubernetes-slave</name>
-          <image>${KUBERNETES_SLAVE_IMAGE}</image>
           <privileged>false</privileged>
-          <command></command>
-          <args></args>
-          <remoteFs>/home/jenkins</remoteFs>
+          <alwaysPullImage>false</alwaysPullImage>
           <instanceCap>2147483647</instanceCap>
+          <idleMinutes>0</idleMinutes>
           <label></label>
+          <nodeSelector></nodeSelector>
+          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
+            <memory>false</memory>
+          </workspaceVolume>
           <volumes>
-            <org.csanchez.jenkins.plugins.kubernetes.PodVolumes_-HostPathVolume>
+            <org.csanchez.jenkins.plugins.kubernetes.volumes.HostPathVolume>
               <mountPath>/var/run/docker.sock</mountPath>
               <hostPath>/var/run/docker.sock</hostPath>
-            </org.csanchez.jenkins.plugins.kubernetes.PodVolumes_-HostPathVolume>
+            </org.csanchez.jenkins.plugins.kubernetes.volumes.HostPathVolume>
           </volumes>
+          <containers>
+            <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+              <name>jenkins-kubernetes-slave</name>
+              <image>smesch/jenkins-kubernetes-slave</image>
+              <privileged>false</privileged>
+              <alwaysPullImage>false</alwaysPullImage>
+              <workingDir>/home/jenkins</workingDir>
+              <command></command>
+              <args></args>
+              <ttyEnabled>true</ttyEnabled>
+              <resourceRequestCpu></resourceRequestCpu>
+              <resourceRequestMemory></resourceRequestMemory>
+              <resourceLimitCpu></resourceLimitCpu>
+              <resourceLimitMemory></resourceLimitMemory>
+              <envVars/>
+            </org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+          </containers>
+          <envVars/>
+          <annotations/>
+          <imagePullSecrets/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
       </templates>
-      <serverUrl>${KUBERNETES_URL}</serverUrl>
+      <serverUrl>https://kubernetes.default.svc.cluster.local</serverUrl>
       <skipTlsVerify>true</skipTlsVerify>
-      <namespace>${KUBERNETES_NAMESPACE}</namespace>
-      <jenkinsUrl>${JENKINS_URL}</jenkinsUrl>
+      <namespace>default</namespace>
+      <jenkinsUrl>http://jenkins-leader-svc.default.svc.cluster.local</jenkinsUrl>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
+      <connectTimeout>0</connectTimeout>
+      <readTimeout>0</readTimeout>
     </org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud>
   </clouds>
+  <quietPeriod>5</quietPeriod>  
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
   <views>
     <hudson.model.AllView>
