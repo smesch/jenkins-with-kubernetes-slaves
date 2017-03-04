@@ -165,13 +165,11 @@ cd jenkins-with-kubernetes-slaves
 
 Once you have setup your local environment or provisioned and logged into your Vagrant environment, you will need to update the [`/scripts/variables.sh`](https://github.com/smesch/jenkins-with-kubernetes-slaves/blob/master/scripts/variables.sh) script with your specific details:
 
-{{< gist ryane 017da418ff44d1071e34f51d0b94ca98 "main.tf" >}}
-
 ```
 # Set values for variables
 export AWS_REGION="us-east-1"
 export AWS_AVAIL_ZONE="us-east-1b"
-export DOMAIN_NAME="jenkins.kubernetes.yourdomain.com"
+export DOMAIN_NAME="k8s.c3group.io"
 export CLUSTER_MASTER_SIZE="t2.micro"
 export CLUSTER_NODE_SIZE="t2.micro"
 export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.32.3"
@@ -199,7 +197,7 @@ Once you have updated the `variables.sh` script, you can then proceed to create 
 ```
 $ ./scripts/create-cluster.sh
 {
-    "Location": "/jenkins.kubernetes.c3group.io"
+    "Location": "/k8s.c3group.io"
 }
 I0926 17:56:37.614045   24007 cluster.go:362] Assigned CIDR 172.20.64.0/19 to zone us-east-1b
 I0926 17:56:37.944348   24007 cluster.go:338] Using kubernetes latest stable version: v1.3.7
@@ -217,7 +215,7 @@ source ./scripts/variables.sh
 aws s3api create-bucket --region ${AWS_REGION} --bucket ${DOMAIN_NAME}
 
 # Create the Kubernetes cluster
-kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --cloud=aws --zones=${AWS_AVAIL_ZONE} --ssh-public-key=${AWS_KEYPAIR_PUB_KEY_PATH} ${DOMAIN_NAME}
+kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --zones=${AWS_AVAIL_ZONE} --ssh-public-key="${AWS_KEYPAIR_PUB_KEY_PATH}" --kubernetes-version=1.4.9 ${DOMAIN_NAME}
 kops update cluster ${DOMAIN_NAME} --yes
 ```
 
@@ -225,7 +223,7 @@ kops update cluster ${DOMAIN_NAME} --yes
 * The AWS S3 bucket is created with the domain you specified for the `DOMAIN_NAME` variable
 * Kops commands are run to provision the Kubernetes cluster
 
-The creation of the Kubernetes cluster will take about 5 &mdash; 7 minutes. To verify that the cluster was created successfully, you can run the following command to verify that the nodes are reporting a "Ready" status:
+The creation of the Kubernetes cluster will take about 5 - 7 minutes. To verify that the cluster was created successfully, you can run the following command to check that the nodes are reporting a "Ready" status:
 
 ```
 $ kubectl get nodes
@@ -247,7 +245,7 @@ persistentvolume "jenkins-leader-pv" created
 service "jenkins-leader-svc" created
 ```
 
-The creation of the Jenkins leader will take about 5 minutes.
+The creation of the Jenkins leader will take about 3 minutes.
 
 ### Contents of the deploy-jenkins.sh Script
 
@@ -341,9 +339,9 @@ You can delete the Kubernetes cluster by launching the [`/scripts/delete-cluster
 ```
 $ ./scripts/delete-cluster.sh
 TYPE			NAME										ID
-autoscaling-config	master-us-east-1b.masters.jenkins.kubernetes.c3group.io-20160930144921		master-us-east-1b.masters.jenkins.kubernetes.c3group.io-20160930144921
-autoscaling-config	nodes.jenkins.kubernetes.c3group.io-20160930145013				nodes.jenkins.kubernetes.c3group.io-20160930145013
-autoscaling-group	master-us-east-1b.masters.jenkins.kubernetes.c3group.io				master-us-east-1b.masters.jenkins.kubernetes.c3group.io
+autoscaling-config	master-us-east-1b.masters.k8s.c3group.io-20160930144921		master-us-east-1b.masters.k8s.c3group.io-20160930144921
+autoscaling-config	nodes.k8s.c3group.io-20160930145013				nodes.k8s.c3group.io-20160930145013
+autoscaling-group	master-us-east-1b.masters.k8s.c3group.io				master-us-east-1b.masters.k8s.c3group.io
 ...
 ...
 ```
