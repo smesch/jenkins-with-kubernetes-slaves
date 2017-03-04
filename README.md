@@ -95,7 +95,7 @@ git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git
 cd jenkins-with-kubernetes-slaves
 ```
 
-Now that your local environment is prepared, you can skip ahead to the [Update the variables.sh Script](#update-the-variablessh-script) section.
+Now that your local environment is prepared, you can skip ahead to the [Update the Variables Script](#update-the-variables-script) section.
 
 # Using Vagrant
 
@@ -161,7 +161,7 @@ vagrant ssh
 cd jenkins-with-kubernetes-slaves
 ```
 
-# Update the Variables.sh Script
+# Update the Variables Script
 
 Once you have setup your local environment or provisioned and logged into your Vagrant environment, you will need to update the [`/scripts/variables.sh`](https://github.com/smesch/jenkins-with-kubernetes-slaves/blob/master/scripts/variables.sh) script with your specific details:
 
@@ -205,7 +205,7 @@ I0926 17:56:37.944348   24007 cluster.go:338] Using kubernetes latest stable ver
 ...
 ```
 
-### Contents of the create-cluster.sh Script
+### Contents of the Create-Cluster Script
 
 ```
 # Load variables from variables.sh script
@@ -247,7 +247,7 @@ service "jenkins-leader-svc" created
 
 The creation of the Jenkins leader will take about 3 minutes.
 
-### Contents of the deploy-jenkins.sh Script
+### Contents of the Deploy-Jenkins Script
 
 ```
 # Load variables from variables.sh script
@@ -346,7 +346,7 @@ autoscaling-group	master-us-east-1b.masters.k8s.c3group.io				master-us-east-1b.
 ...
 ```
 
-### Contents of the delete-cluster.sh Script
+### Contents of the Delete-Cluster Script
 
 ```
 # Load variables from variables.sh script
