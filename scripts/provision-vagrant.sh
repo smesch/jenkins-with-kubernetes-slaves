@@ -15,11 +15,6 @@ echo "export GOPATH=/home/vagrant" >>~/.profile
 echo "export PATH=$PATH:${GOPATH}/bin" >>~/.profile
 . ~/.profile
 
-# Install Kops (latest)
-go get -d k8s.io/kops
-cd ${GOPATH}/src/k8s.io/kops/
-make
-
 # Install AWS CLI (latest)
 wget --quiet https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
 unzip awscli-bundle.zip
@@ -30,7 +25,12 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubectl (v.1.4.8)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.4.8/bin/linux/amd64/kubectl
+# Install Kubectl (latest)
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
+
+#Install Kops (1.5.1)
+wget --quiet https://github.com/kubernetes/kops/releases/download/1.5.1/kops-linux-amd64
+sudo chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
