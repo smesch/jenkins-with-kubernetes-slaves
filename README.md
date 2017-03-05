@@ -72,10 +72,10 @@ This section will guide you through the preparation of your local environment if
 
 8. Jq [installed](https://stedolan.github.io/jq/download/)
 
-### Install Kubectl (1.4.9)
+### Install Kubectl (1.5.3)
 
 ```
-wget https://storage.googleapis.com/kubernetes-release/release/v1.4.9/bin/linux/amd64/kubectl
+wget https://storage.googleapis.com/kubernetes-release/release/v1.5.3/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 ```
@@ -215,7 +215,7 @@ source ./scripts/variables.sh
 aws s3api create-bucket --region ${AWS_REGION} --bucket ${DOMAIN_NAME}
 
 # Create the Kubernetes cluster
-kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --zones=${AWS_AVAIL_ZONE} --ssh-public-key="${AWS_KEYPAIR_PUB_KEY_PATH}" --kubernetes-version=1.4.9 ${DOMAIN_NAME}
+kops create cluster --master-size=${CLUSTER_MASTER_SIZE} --node-size=${CLUSTER_NODE_SIZE} --zones=${AWS_AVAIL_ZONE} --ssh-public-key="${AWS_KEYPAIR_PUB_KEY_PATH}" --kubernetes-version=1.5.3 ${DOMAIN_NAME}
 kops update cluster ${DOMAIN_NAME} --yes
 ```
 
