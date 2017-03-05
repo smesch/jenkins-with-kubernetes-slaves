@@ -47,7 +47,7 @@
               <alwaysPullImage>false</alwaysPullImage>
               <workingDir>/home/jenkins</workingDir>
               <command></command>
-              <args></args>
+              <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>true</ttyEnabled>
               <resourceRequestCpu></resourceRequestCpu>
               <resourceRequestMemory></resourceRequestMemory>
