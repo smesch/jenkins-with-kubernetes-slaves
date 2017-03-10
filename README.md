@@ -4,6 +4,8 @@
 
 Example code for the [Dynamically Provisioned (On-Demand) Jenkins Slaves in a Kubernetes Cluster on AWS](https://kumorilabs.com/blog/dynamically-provisioned-jenkins-slaves-kubernetes-aws/) blog post.
 
+## TL;DR
+
 ```
 vagrant up
 
