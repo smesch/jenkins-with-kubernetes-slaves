@@ -1,7 +1,7 @@
 # Set values for variables
-export AWS_REGION="eu-central-1"
-export AWS_AVAIL_ZONE="eu-central-1a"
-export AWS_AVAIL_ZONES="eu-central-1a,eu-central-1b"
+export AWS_REGION="eu-west-1"
+export AWS_AVAIL_ZONE="eu-west-1a"
+export AWS_AVAIL_ZONES="eu-west-1a,eu-west-1b,eu-west-1c"
 export DOMAIN_NAME="k8s-eu.c3group.io"
 export CLUSTER_MASTER_SIZE="t2.micro"
 export CLUSTER_NODE_SIZE="t2.micro"
