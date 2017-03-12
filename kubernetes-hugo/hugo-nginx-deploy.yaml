@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hugo-nginx
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: hugo-nginx
+    spec:
+      securityContext:
+        fsGroup: 99
+      containers:
+        - name: hugo-nginx
+          image: smesch/hugo-nginx:1.1
+          ports:
+            - containerPort: 80
