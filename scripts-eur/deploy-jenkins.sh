@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts-us/variables.sh
+source ./scripts-eur/variables.sh
 
 # Check if there is already a volume available in AWS EC2 with a Name tag value of "jenkins-kubernetes-volume"
 export JENKINS_KUBERNETES_VOLUME_CHECK=$(aws ec2 describe-volumes --region ${AWS_REGION} --filters Name=tag-key,Values="Name" Name=tag-value,Values="jenkins-kubernetes-volume" --output text --query 'Volumes[*].VolumeId')

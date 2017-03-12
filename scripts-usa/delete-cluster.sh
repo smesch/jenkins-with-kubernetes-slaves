@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts-eu/variables.sh
+source ./scripts-usa/variables.sh
 
 # Delete the Kubernetes cluster
 kops delete cluster ${DOMAIN_NAME} --yes
@@ -12,4 +12,4 @@ export JENKINS_KUBERNETES_VOLUME=$(aws ec2 describe-volumes --region ${AWS_REGIO
 aws ec2 delete-volume --region ${AWS_REGION} --volume-id $JENKINS_KUBERNETES_VOLUME
 
 # Delete the S3 bucket used for Kubernetes cluster configuration storage
-aws s3api delete-bucket --region ${AWS_REGION} --bucket ${DOMAIN_NAME}
+aws s3api delete-bucket --bucket ${DOMAIN_NAME}

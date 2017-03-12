@@ -2,7 +2,7 @@
 export AWS_REGION="eu-west-1"
 export AWS_AVAIL_ZONE="eu-west-1a"
 export AWS_AVAIL_ZONES="eu-west-1a,eu-west-1b,eu-west-1c"
-export DOMAIN_NAME="k8s-eu.c3group.io"
+export DOMAIN_NAME="k8s-eur.c3group.io"
 export CLUSTER_MASTER_SIZE="t2.micro"
 export CLUSTER_NODE_SIZE="t2.micro"
 export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.32.3"
