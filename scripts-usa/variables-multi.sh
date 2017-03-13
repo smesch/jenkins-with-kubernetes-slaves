@@ -1,8 +1,8 @@
 # Set values for variables
-export AWS_REGION="eu-west-1"
-export AWS_AVAIL_ZONE="eu-west-1a"
-export AWS_AVAIL_ZONES="eu-west-1a"
-export DOMAIN_NAME="k8s-eur.c3group.io"
+export AWS_REGION="us-east-1"
+export AWS_AVAIL_ZONE="us-east-1a"
+export AWS_AVAIL_ZONES="us-east-1a,us-east-1b,us-east-1c"
+export DOMAIN_NAME="k8s-usa.c3group.io"
 export CLUSTER_MASTER_SIZE="t2.micro"
 export CLUSTER_NODE_SIZE="t2.micro"
 export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.32.3"
