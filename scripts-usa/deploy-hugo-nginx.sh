@@ -2,4 +2,4 @@
 source ./scripts-usa/variables.sh
 
 # Create Kubernetes objects
-kubectl --context ${CLUSTER_NAME} create -f ./kubernetes-hugo
+kubectl --context ${DOMAIN_NAME} create -f ./kubernetes-hugo

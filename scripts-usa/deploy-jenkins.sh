@@ -15,4 +15,4 @@ fi
 sed -i -e "s|image: .*|image: $JENKINS_DOCKER_IMAGE|g" ./kubernetes/jenkins-kubernetes-leader-deploy.yaml
 
 # Create Kubernetes objects
-kubectl --context ${CLUSTER_NAME} create -f ./kubernetes
+kubectl --context ${DOMAIN_NAME} create -f ./kubernetes
