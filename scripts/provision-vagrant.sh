@@ -25,8 +25,8 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubectl (1.5.3)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.5.3/bin/linux/amd64/kubectl
+# Install Kubectl (1.5.4)
+wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.5.4/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 
