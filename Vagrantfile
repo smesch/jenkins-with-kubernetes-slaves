@@ -34,7 +34,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get install git -y
 
     # Clone git repository into $HOME/jenkins-with-kubernetes-slaves/ directory
-    git clone https://github.com/smesch/jenkins-with-kubernetes-slaves.git $HOME/jenkins-with-kubernetes-slaves/
+    git clone -b aws-federation https://github.com/smesch/jenkins-with-kubernetes-slaves.git $HOME/jenkins-with-kubernetes-slaves/
 
     # Export AWS CLI ENV variables on guest
     export AWS_ACCESS_KEY_ID=#{aws_access_key_id}
