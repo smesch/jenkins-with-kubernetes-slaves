@@ -1,0 +1,20 @@
+{
+  "Comment": "Create/Update a latency-based CNAME record in Europe",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "hugo.c3group.io",
+        "Type": "CNAME",
+        "Region": "eu-west-1",
+        "TTL": 300,
+        "SetIdentifier": "eu-west-1",
+        "ResourceRecords": [
+          {
+            "Value": "a88b7980a08ef11e782b00644a8562f4-890362931.eu-west-1.elb.amazonaws.com"
+          }
+        ]
+      }
+    }
+  ]
+}
