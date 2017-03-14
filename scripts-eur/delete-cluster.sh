@@ -2,7 +2,7 @@
 source ./scripts-eur/variables.sh
 
 # Delete the Kubernetes cluster
-kops delete cluster ${DOMAIN_NAME} --yes
+kops delete cluster ${CLUSTER_NAME} --yes
 
 # Wait for Kubernetes cluster instances to be fully terminated
 sleep 60
