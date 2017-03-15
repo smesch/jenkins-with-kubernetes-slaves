@@ -6,7 +6,8 @@ kubectl config use-context ${CLUSTER_CONTEXT_USA}
 kubefed init ${FEDERATION_NAME} --host-cluster-context=${CLUSTER_CONTEXT_USA} --dns-provider=aws-route53 --dns-zone-name=${CLUSTER_CONTEXT_USA}
 
 # Wait for Federation Controller & API to be deployed
-sleep 60
+echo "Waiting for the Federation Control Plane to initialize (180 seconds)"
+sleep 180
 
 # Join Clusters to Federation
 kubectl config use-context ${FEDERATION_NAME}
