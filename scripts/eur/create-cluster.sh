@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts-eur/variables.sh
+source ./scripts/eur/variables.sh
 
 # Create the S3 bucket used for Kubernetes cluster configuration storage
 aws s3api create-bucket --bucket ${DOMAIN_NAME}

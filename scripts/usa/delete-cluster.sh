@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts-usa/variables.sh
+source ./scripts/usa/variables.sh
 
 # Delete the Kubernetes cluster
 kops delete cluster ${DOMAIN_NAME} --yes

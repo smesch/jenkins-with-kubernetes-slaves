@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts-eur/variables.sh
+source ./scripts/eur/variables.sh
 
 # Delete the Kubernetes cluster
 kops delete cluster ${DOMAIN_NAME} --yes

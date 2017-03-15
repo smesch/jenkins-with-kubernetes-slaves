@@ -1,10 +1,13 @@
+# Load variables from variables.sh script
+source ./scripts/variables.sh
+
 # Install unzip & jq
 sudo apt-get install unzip jq -y
 
-# Install Go (v.1.8) 
-wget --quiet https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.8.linux-amd64.tar.gz
-rm go1.8.linux-amd64.tar.gz
+# Install Go 
+wget --quiet https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
+rm go${GO_VERSION}.linux-amd64.tar.gz
 
 # Set the required paths for Go
 export PATH=$PATH:/usr/local/go/bin
@@ -25,12 +28,17 @@ rm awscli-bundle.zip
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
-# Install Kubectl (1.5.4)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.5.4/bin/linux/amd64/kubectl
+# Install Kubectl
+wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 
-# Install Kops (1.5.3)
-wget --quiet https://github.com/kubernetes/kops/releases/download/1.5.3/kops-linux-amd64
+# Install Kubefed
+wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBEFED_VERSION}/bin/linux/amd64/kubefed
+sudo chmod +x kubefed
+sudo mv kubectl /usr/local/bin/kubefed
+
+# Install Kops
+wget --quiet https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
 sudo chmod +x kops-linux-amd64
 sudo mv kops-linux-amd64 /usr/local/bin/kops
