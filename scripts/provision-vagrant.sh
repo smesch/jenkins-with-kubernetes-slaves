@@ -33,7 +33,7 @@ sudo mv kubectl /usr/local/bin/kubectl
 # Install Kubefed
 wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBEFED_VERSION}/bin/linux/amd64/kubefed
 sudo chmod +x kubefed
-sudo mv kubectl /usr/local/bin/kubefed
+sudo mv kubefed /usr/local/bin/kubefed
 
 # Install Kops
 wget --quiet https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
