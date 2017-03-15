@@ -11,7 +11,7 @@
         "SetIdentifier": "eu-west-1",
         "ResourceRecords": [
           {
-            "Value": "a88b7980a08ef11e782b00644a8562f4-890362931.eu-west-1.elb.amazonaws.com"
+            "Value": "HUGO_NGINX_ELB_EUR"
           }
         ]
       }

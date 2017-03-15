@@ -9,7 +9,7 @@
         "TTL": 300,
         "ResourceRecords": [
           {
-            "Value": "a3022c15b091811e788c70aaa336904a-1272157155.us-east-1.elb.amazonaws.com"
+            "Value": "JENKINS_ELB"
           }
         ]
       }
