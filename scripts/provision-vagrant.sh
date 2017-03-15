@@ -1,5 +1,5 @@
 # Load variables from variables.sh script
-source ./scripts/variables.sh
+source $HOME/jenkins-with-kubernetes-slaves/scripts/variables.sh
 
 # Install unzip & jq
 sudo apt-get install unzip jq -y
