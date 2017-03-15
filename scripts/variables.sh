@@ -3,6 +3,8 @@ export FEDERATION_NAME="k8s-fed"
 export CLUSTER_NAME_USA="k8s-usa"
 export CLUSTER_NAME_EUR="k8s-eur"
 export TOP_LEVEL_DOMAIN="c3group.io"
+export CLUSTER_CONTEXT_USA="${CLUSTER_NAME_USA}.${TOP_LEVEL_DOMAIN}"
+export CLUSTER_CONTEXT_EUR="${CLUSTER_NAME_EUR}.${TOP_LEVEL_DOMAIN}"
 export JENKINS_DOCKER_IMAGE="smesch/jenkins-kubernetes-leader-custom:2.32.3"
 
 # Set versions for installations
