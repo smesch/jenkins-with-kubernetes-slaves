@@ -49,6 +49,8 @@ Vagrant.configure(2) do |config|
 
 # Run the local copy of the provision-vagrant.sh script
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    # Load variables from variables.sh script
+    source $HOME/jenkins-with-kubernetes-slaves/scripts/variables.sh
     $HOME/jenkins-with-kubernetes-slaves/scripts/provision-vagrant.sh
   SHELL
 
