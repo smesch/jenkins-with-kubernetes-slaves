@@ -2,7 +2,7 @@
 
 DOCKER  = docker
 REPO    = smesch
-NAME    = jenkins-kubernetes-slave-test
+NAME    = jenkins-kubernetes-slave-custom
 VERSION = latest
 
 all: build
