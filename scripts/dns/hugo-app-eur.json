@@ -4,14 +4,14 @@
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "hugo.c3group.io",
+        "Name": "hugo.TOP_LEVEL_DOMAIN",
         "Type": "CNAME",
-        "Region": "eu-west-1",
+        "Region": "AWS_REGION_EUR",
         "TTL": 300,
-        "SetIdentifier": "eu-west-1",
+        "SetIdentifier": "AWS_REGION_EUR",
         "ResourceRecords": [
           {
-            "Value": "HUGO_NGINX_ELB_EUR"
+            "Value": "HUGO_APP_ELB_EUR"
           }
         ]
       }

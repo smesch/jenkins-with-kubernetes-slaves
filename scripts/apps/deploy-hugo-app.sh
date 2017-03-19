@@ -2,4 +2,4 @@
 source ./scripts/variables.sh
 
 # Create Kubernetes objects
-kubectl --context ${FEDERATION_NAME} create -f ./kubernetes-hugo
+kubectl --context ${FEDERATION_NAME} create -f ./kubernetes/hugo

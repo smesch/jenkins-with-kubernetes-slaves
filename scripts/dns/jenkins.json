@@ -4,7 +4,7 @@
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "jenkins.c3group.io",
+        "Name": "jenkins.TOP_LEVEL_DOMAIN",
         "Type": "CNAME",
         "TTL": 300,
         "ResourceRecords": [
